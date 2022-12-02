@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "github.com/vandenbill/grpc-basic/calculator/proto";
+
+message CalculatorRequest {
+    int64 v1 = 1;
+    int64 v2 = 2;
+}
+
+message CalculatorResponse {
+    int64 r = 1;
+}
+
+service CalculatorService {
+    rpc Calculate (CalculatorRequest) returns (CalculatorResponse);
+    rpc CalculateManyTimes (CalculatorRequest) returns (stream CalculatorResponse);
+    rpc CalculateLongClientStream (stream CalculatorRequest) returns (CalculatorResponse);
+    rpc CalculateBiDirectional (stream CalculatorRequest) returns (stream CalculatorResponse);
+}
